@@ -8,14 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
+    let items = Array(1...30)
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ScrollView {
+            StaggeredGridLayout(columns: 2) {
+                ForEach(items, id: \.self) { item in
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(Color.blue.opacity(0.7))
+                        .frame(height: CGFloat.random(in: 80...400))
+                        .overlay(Text("Item \(item)").foregroundColor(.white))
+                        .padding(5)
+                }
+            }
         }
-        .padding()
+        .navigationTitle("Staggered Grid")
     }
 }
 
